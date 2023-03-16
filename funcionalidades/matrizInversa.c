@@ -5,7 +5,7 @@
 int main() {
 
     int matrizA[2][2];
-    int matrizAdjacente[2][2];
+    int matrizAdjunta[2][2];
     int determinante;
 
     double inversaDaMatrizA[2][2];
@@ -46,9 +46,9 @@ int main() {
     for(i = 0; i < 2; i++) {
         for(j = 0; j < 2; j++) {
             if(i != j) {
-                matrizAdjacente[i][j] = -matrizA[k][l];
+                matrizAdjunta[i][j] = -matrizA[k][l];
             } else {
-                matrizAdjacente[i][j] = matrizA[k][l];
+                matrizAdjunta[i][j] = matrizA[k][l];
             }
 
             if(k == 1) {
@@ -59,18 +59,18 @@ int main() {
         l--;
     }
 
-    printf("\nMatriz adjacente:\n");
+    printf("\nMatriz adjunta:\n");
 
     for(i = 0; i < 2; i++) {
         for(j = 0; j < 2; j++) {
-            printf("%d ", matrizAdjacente[i][j]);
+            printf("%d ", matrizAdjunta[i][j]);
         }
         printf("\n");
     }
 
     for(i = 0; i < 2; i++) {
         for(j = 0; j < 2; j++) {
-            inversaDaMatrizA[i][j] = (double)matrizAdjacente[i][j] / determinante;
+            inversaDaMatrizA[i][j] = (double)matrizAdjunta[i][j] / determinante;
         }
     }
 
