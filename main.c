@@ -72,20 +72,22 @@ void converte_minusculo(char mensagem_usuario[TMNH], int tmnh_mensagem) {
 }
 
 void converte_mensagem_para_numero(char mensagem_usuario[TMNH], int mensagem_numerica[2][TMNH], int qtd_colunas) {
-    int i, j, x;
+    int i, j, k;
+
+    k = 0;
 
     for (i = 0; i < 2; i++){
         for (j = 0; j < qtd_colunas; j++){
-            if (mensagem_usuario[x] >= 'a' && mensagem_usuario[x] <= 'z'){
-                mensagem_numerica[i][j] = mensagem_usuario[x]-'a'+1;
-            } else if (mensagem_usuario[x] == '.') {
-                mensagem_numerica[i][j] = mensagem_usuario[x]-19;
-            } else if (mensagem_usuario[x] == ',') {
-                mensagem_numerica[i][j] = mensagem_usuario[x]-16;
+            if (mensagem_usuario[k] >= 'a' && mensagem_usuario[k] <= 'z'){
+                mensagem_numerica[i][j] = mensagem_usuario[k]-'a'+1;
+            } else if (mensagem_usuario[k] == '.') {
+                mensagem_numerica[i][j] = mensagem_usuario[k]-19;
+            } else if (mensagem_usuario[k] == ',') {
+                mensagem_numerica[i][j] = mensagem_usuario[k]-16;
             } else {
                 mensagem_numerica[i][j] = 29;
             }
-            x++;
+            k++;
         }
     }
 }
@@ -138,7 +140,7 @@ int main() {
 
     converte_mensagem_para_numero(mensagem_usuario, mensagem_numerica, qtd_colunas);
 
-    printf("Mensagem convertida para numeros: \n");
+    printf("\nMensagem convertida para numeros: \n");
 
     for (i = 0; i < 2; i++){
         for (j = 0; j < qtd_colunas; j++){
