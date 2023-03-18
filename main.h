@@ -1,0 +1,1 @@
+void gera_matriz(int matriz_a[2][2]);
