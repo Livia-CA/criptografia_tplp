@@ -4,7 +4,7 @@
 
 int main() {
 
-    int matrizA[2][2];
+    int matrizA[2][2] = {4,7,8,1};
     int matrizAdjunta[2][2];
     int determinante;
 
@@ -18,7 +18,7 @@ int main() {
 
     for(i = 0; i < 2; i++) {
         for(j = 0; j < 2; j++) {
-            matrizA[i][j] = rand()%10000;
+            //matrizA[i][j] = rand()%10000;
 
             determinante = (matrizA[0][0] * matrizA[1][1]) - (matrizA[0][1] * matrizA[1][0]);
 

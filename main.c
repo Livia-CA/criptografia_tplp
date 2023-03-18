@@ -3,20 +3,19 @@
 #include <time.h>
 #include "main.h"
 
-void gera_matriz(int matriz_a[2][2]) {
+void gera_matriz(int matriz_a[2][2], int* determinante) {
     int i, j;
-    int determinante;
 
     srand(time(0));
 
     for(i = 0; i < 2; i++) {
         for(j = 0; j < 2; j++) {
-            matriz_a[i][j] = rand()%1000;
+            matriz_a[i][j] = rand()%9;
 
-            determinante = (matriz_a[0][0] * matriz_a[1][1]) - (matriz_a[0][1] * matriz_a[1][0]);
+            *determinante = (matriz_a[0][0] * matriz_a[1][1]) - (matriz_a[0][1] * matriz_a[1][0]);
         }
         
-        if(determinante == 0) {
+        if(*determinante == 0) {
             i = 0;
             j = 0;
         }
@@ -46,13 +45,27 @@ void gera_matriz_adjunta(int matriz_a[2][2], int matriz_adjunta[2][2]) {
     }
 }
 
+void gera_matriz_inversa(int matriz_adjunta[2][2], int determinante, double inversa_matriz_a[2][2]) {
+    int i, j;
+
+    printf("%d", determinante);
+
+    for(i = 0; i < 2; i++) {
+        for(j = 0; j < 2; j++) {
+            inversa_matriz_a[i][j] = (double)matriz_adjunta[i][j] / determinante;
+        }
+    }
+}
+
 int main() {
 
     int i, j;
     int matriz_a[2][2];
+    int determinante;
     int matriz_adjunta[2][2];
+    double inversa_matriz_a[2][2];
 
-    gera_matriz(matriz_a);
+    gera_matriz(matriz_a, &determinante);
 
     printf("Matriz A:\n");
 
@@ -64,7 +77,18 @@ int main() {
     }
 
     gera_matriz_adjunta(matriz_a, matriz_adjunta);
-    
+
+    gera_matriz_inversa(matriz_adjunta, determinante, inversa_matriz_a);
+
+    printf("\nInversa da matriz A: \n");
+
+    for(i = 0; i < 2; i++) {
+        for(j = 0; j < 2; j++) {
+            printf("%f ", inversa_matriz_a[i][j]);
+        }
+        printf("\n");
+    }
+
     return 0;
 
 }
