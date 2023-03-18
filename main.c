@@ -105,6 +105,27 @@ void produto_matrizes(int qtd_colunas, double result[2][TMNH], double matriz_a[2
     }
 }
 
+void decodifica_mensagem(int qtd_colunas, char mensagem_descriptografada[TMNH], double mensagem_numerica[2][TMNH]) {
+    int i, j, x;
+
+    x = 0;
+
+    for (i = 0; i < 2; i++){
+        for (j = 0; j < qtd_colunas; j++){
+            if ((int)mensagem_numerica[i][j] >= 1 && (int)mensagem_numerica[i][j] <= 26){
+                mensagem_descriptografada[x] = (int)mensagem_numerica[i][j]+'a'-1;
+            } else if ((int)mensagem_numerica[i][j] == 27) {
+                mensagem_descriptografada[x] = (int)mensagem_numerica[i][j]+19;
+            } else if ((int)mensagem_numerica[i][j] == 28) {
+                mensagem_descriptografada[x] = (int)mensagem_numerica[i][j]+16;
+            } else {
+                mensagem_descriptografada[x] = 32;
+            }
+            x++;
+        }
+    }
+}
+
 int main() {
     int i, j;
     double matriz_a[2][2];
@@ -119,6 +140,7 @@ int main() {
 
     double mensagem_codificada[2][TMNH];
     double mensagem_decodificada[2][TMNH];
+    char mensagem_descriptografada[TMNH];
 
     gera_matriz(matriz_a, &determinante);
 
@@ -185,6 +207,14 @@ int main() {
             printf("%f ", mensagem_decodificada[i][j]);
         }
         printf("\n");
+    }
+
+    decodifica_mensagem(qtd_colunas ,mensagem_descriptografada, mensagem_numerica);
+
+    printf("\n");
+
+    for (i = 0; i < tmnh_mensagem; i++){
+        printf("%c", mensagem_descriptografada[i]);
     }
 
     return 0;
