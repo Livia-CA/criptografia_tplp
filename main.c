@@ -135,11 +135,11 @@ int main() {
 
     char mensagem_usuario[TMNH];
     double mensagem_numerica[2][TMNH];
-    int qtd_colunas;
     int tmnh_mensagem;
+    int qtd_colunas;
 
-    double mensagem_codificada[2][TMNH];
-    double mensagem_decodificada[2][TMNH];
+    double mensagem_numerica_codificada[2][TMNH];
+    double mensagem_numerica_decodificada[2][TMNH];
     char mensagem_descriptografada[TMNH];
 
     gera_matriz(matriz_a, &determinante);
@@ -148,7 +148,7 @@ int main() {
 
     for(i = 0; i < 2; i++) {
         for(j = 0; j < 2; j++) {
-            printf("%f ", matriz_a[i][j]);
+            printf("%.f ", matriz_a[i][j]);
         }
         printf("\n");
     }
@@ -182,34 +182,34 @@ int main() {
 
     for (i = 0; i < 2; i++){
         for (j = 0; j < qtd_colunas; j++){
-            printf("%f ", mensagem_numerica[i][j]);
+            printf("%.f ", mensagem_numerica[i][j]);
         }
         printf("\n");
     }
 
-    produto_matrizes(qtd_colunas, mensagem_codificada, mensagem_numerica, matriz_a);
+    produto_matrizes(qtd_colunas, mensagem_numerica_codificada, mensagem_numerica, matriz_a);
 
     printf("\n\nMensagem codificada: \n");
 
     for(i = 0; i < 2; i++){
         for(j = 0; j < qtd_colunas; j++){
-            printf("%f ", mensagem_codificada[i][j]);
+            printf("%.f ", mensagem_numerica_codificada[i][j]);
         }
         printf("\n");
     }
 
-    produto_matrizes(qtd_colunas, mensagem_decodificada, mensagem_codificada, inversa_matriz_a);
+    produto_matrizes(qtd_colunas, mensagem_numerica_decodificada, mensagem_numerica_codificada, inversa_matriz_a);
 
     printf("\n\nMensagem decodificada: \n");
 
     for(i = 0; i < 2; i++){
         for(j = 0; j < qtd_colunas; j++){
-            printf("%f ", mensagem_decodificada[i][j]);
+            printf("%.f ", mensagem_numerica_decodificada[i][j]);
         }
         printf("\n");
     }
 
-    decodifica_mensagem(qtd_colunas ,mensagem_descriptografada, mensagem_numerica);
+    decodifica_mensagem(qtd_colunas, mensagem_descriptografada, mensagem_numerica);
 
     printf("\n");
 
