@@ -1,6 +1,7 @@
 #define TMNH 10000
 
 void gera_matriz(double matriz_a[2][2], int* determinante);
+void imprime_matriz_quadrada(double matriz[2][2]);
 void gera_matriz_adjunta(double matriz_a[2][2], int matriz_adjunta[2][2]);
 void gera_matriz_inversa(int matriz_adjunta[2][2], int determinante, double inversa_matriz_a[2][2]);
 

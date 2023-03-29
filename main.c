@@ -13,7 +13,7 @@ void gera_matriz(double matriz_a[2][2], int* determinante) {
 
     for(i = 0; i < 2; i++) {
         for(j = 0; j < 2; j++) {
-            matriz_a[i][j] = rand()%1000;
+            matriz_a[i][j] = rand()%10000;
 
             *determinante = (matriz_a[0][0] * matriz_a[1][1]) - (matriz_a[0][1] * matriz_a[1][0]);
         }
@@ -55,6 +55,17 @@ void gera_matriz_inversa(int matriz_adjunta[2][2], int determinante, double inve
         for(j = 0; j < 2; j++) {
             inversa_matriz_a[i][j] = (double)matriz_adjunta[i][j] / determinante;
         }
+    }
+}
+
+void imprime_matriz_quadrada(double matriz[2][2]) {
+    int i, j;
+
+    for(i = 0; i < 2; i++) {
+        for(j = 0; j < 2; j++) {
+            printf("%f\t ", matriz[i][j]);
+        }
+        printf("\n");
     }
 }
 
@@ -142,80 +153,88 @@ int main() {
     double mensagem_numerica_decodificada[2][TMNH];
     char mensagem_descriptografada[TMNH];
 
-    gera_matriz(matriz_a, &determinante);
+    int opcao_menu;
 
-    printf("Matriz A:\n");
+    do {
+        scanf("%d%*c", &opcao_menu);
 
-    for(i = 0; i < 2; i++) {
-        for(j = 0; j < 2; j++) {
-            printf("%.f ", matriz_a[i][j]);
+        switch(opcao_menu) {
+            case 1:
+                gera_matriz(matriz_a, &determinante);
+                
+                printf("\nMatriz A:\n");
+
+                imprime_matriz_quadrada(matriz_a);
+
+                gera_matriz_adjunta(matriz_a, matriz_adjunta);
+
+                gera_matriz_inversa(matriz_adjunta, determinante, inversa_matriz_a);
+
+                printf("\nInversa da Matriz A:\n");
+
+                imprime_matriz_quadrada(inversa_matriz_a);
+            break;
+
+            case 2:
+                recebe_mensagem_usuario(mensagem_usuario);
+
+                tmnh_mensagem = strlen(mensagem_usuario) - 1;
+
+                converte_minusculo(mensagem_usuario, tmnh_mensagem);
+
+                qtd_colunas = (tmnh_mensagem % 2) == 0 ? (tmnh_mensagem / 2) : (tmnh_mensagem / 2) + 1;
+
+                converte_mensagem_para_numero(mensagem_usuario, mensagem_numerica, qtd_colunas);
+
+                produto_matrizes(qtd_colunas, mensagem_numerica_codificada, mensagem_numerica, matriz_a);
+
+                printf("Mensagem codificada com sucesso!");
+            break;
+
+            case 3:
+                printf("\n\nMensagem codificada: \n");
+
+                for(i = 0; i < 2; i++){
+                    for(j = 0; j < qtd_colunas; j++){
+                        printf("%.f\t ", mensagem_numerica_codificada[i][j]);
+                    }
+                    printf("\n");
+                }
+            break;
+
+            case 4:
+                produto_matrizes(qtd_colunas, mensagem_numerica_decodificada, mensagem_numerica_codificada, inversa_matriz_a);
+
+                printf("\n\nMensagem decodificada:\n\n");
+
+                for(i = 0; i < 2; i++){
+                    for(j = 0; j < qtd_colunas; j++){
+                        printf("%.f ", mensagem_numerica_decodificada[i][j]);
+                    }
+                }
+
+                decodifica_mensagem(qtd_colunas, mensagem_descriptografada, mensagem_numerica);
+
+                printf("\n");
+
+                for (i = 0; i < tmnh_mensagem; i++){
+                    printf("%c", mensagem_descriptografada[i]);
+                }
+
+                exit(0);
+            break;
+
+            case 9:
+                printf("Programa encerrado");
+                exit(0);
+            break;
+        
+            default:
+                printf("Programa encerrado");
+                exit(0);
+            break;
         }
-        printf("\n");
-    }
-
-    gera_matriz_adjunta(matriz_a, matriz_adjunta);
-
-    gera_matriz_inversa(matriz_adjunta, determinante, inversa_matriz_a);
-
-    printf("\nInversa da matriz A: \n");
-
-    for(i = 0; i < 2; i++) {
-        for(j = 0; j < 2; j++) {
-            printf("%f ", inversa_matriz_a[i][j]);
-        }
-        printf("\n");
-    }
-
-    printf("\n");
-
-    recebe_mensagem_usuario(mensagem_usuario);
-
-    tmnh_mensagem = strlen(mensagem_usuario) - 1;
-
-    converte_minusculo(mensagem_usuario, tmnh_mensagem);
-
-    qtd_colunas = (tmnh_mensagem % 2) == 0 ? (tmnh_mensagem / 2) : (tmnh_mensagem / 2) + 1;
-
-    converte_mensagem_para_numero(mensagem_usuario, mensagem_numerica, qtd_colunas);
-
-    printf("\nMensagem convertida para numeros: \n");
-
-    for (i = 0; i < 2; i++){
-        for (j = 0; j < qtd_colunas; j++){
-            printf("%.f ", mensagem_numerica[i][j]);
-        }
-        printf("\n");
-    }
-
-    produto_matrizes(qtd_colunas, mensagem_numerica_codificada, mensagem_numerica, matriz_a);
-
-    printf("\n\nMensagem codificada: \n");
-
-    for(i = 0; i < 2; i++){
-        for(j = 0; j < qtd_colunas; j++){
-            printf("%.f ", mensagem_numerica_codificada[i][j]);
-        }
-        printf("\n");
-    }
-
-    produto_matrizes(qtd_colunas, mensagem_numerica_decodificada, mensagem_numerica_codificada, inversa_matriz_a);
-
-    printf("\n\nMensagem decodificada: \n");
-
-    for(i = 0; i < 2; i++){
-        for(j = 0; j < qtd_colunas; j++){
-            printf("%.f ", mensagem_numerica_decodificada[i][j]);
-        }
-        printf("\n");
-    }
-
-    decodifica_mensagem(qtd_colunas, mensagem_descriptografada, mensagem_numerica);
-
-    printf("\n");
-
-    for (i = 0; i < tmnh_mensagem; i++){
-        printf("%c", mensagem_descriptografada[i]);
-    }
+    } while (1);
 
     return 0;
 }
