@@ -69,10 +69,11 @@ void imprime_matriz_quadrada(int matriz[2][2]) {
 void recebe_mensagem_usuario(char mensagem_usuario[TMNH]) {
     printf("\n\nInforme a mensagem: ");
     fgets(mensagem_usuario, TMNH, stdin);
+    mensagem_usuario[strcspn(mensagem_usuario, "\r\n")] = 0;
 }
 
 void tamanho_mensagem(int* tmnh_mensagem, char mensagem_usuario[TMNH]) {
-    *tmnh_mensagem = strlen(mensagem_usuario) - 1;
+    *tmnh_mensagem = strlen(mensagem_usuario);
 }
 
 void converte_minusculo(char mensagem_usuario[TMNH], int tmnh_mensagem) {
