@@ -6,7 +6,7 @@
 #include <ctype.h>
 #include "main.h"
 
-void gera_matriz(double matriz_a[2][2], int* determinante) {
+void gera_matriz(int matriz_a[2][2], int* determinante) {
     int i, j;
 
     srand(time(0));
@@ -19,10 +19,10 @@ void gera_matriz(double matriz_a[2][2], int* determinante) {
         }
 
         *determinante = (matriz_a[0][0] * matriz_a[1][1]) - (matriz_a[0][1] * matriz_a[1][0]);
-    } while(*determinante == 0);
+    } while(*determinante != 1 && *determinante != -1);
 }
 
-void gera_matriz_adjunta(double matriz_a[2][2], int matriz_adjunta[2][2]) {
+void gera_matriz_adjunta(int matriz_a[2][2], int matriz_adjunta[2][2]) {
     int i, j, k, l;
 
     k = 1;
@@ -45,22 +45,22 @@ void gera_matriz_adjunta(double matriz_a[2][2], int matriz_adjunta[2][2]) {
     }
 }
 
-void gera_matriz_inversa(int matriz_adjunta[2][2], int determinante, double inversa_matriz_a[2][2]) {
+void gera_matriz_inversa(int matriz_adjunta[2][2], int determinante, int inversa_matriz_a[2][2]) {
     int i, j;
 
     for(i = 0; i < 2; i++) {
         for(j = 0; j < 2; j++) {
-            inversa_matriz_a[i][j] = (double)matriz_adjunta[i][j] / determinante;
+            inversa_matriz_a[i][j] = (int)matriz_adjunta[i][j] / determinante;
         }
     }
 }
 
-void imprime_matriz_quadrada(double matriz[2][2]) {
+void imprime_matriz_quadrada(int matriz[2][2]) {
     int i, j;
 
     for(i = 0; i < 2; i++) {
         for(j = 0; j < 2; j++) {
-            printf("%f\t ", matriz[i][j]);
+            printf("%6d ", matriz[i][j]);
         }
         printf("\n");
     }
@@ -87,7 +87,7 @@ void quantidade_colunas(int* qtd_colunas, int tmnh_mensagem) {
     *qtd_colunas = (tmnh_mensagem % 2) == 0 ? (tmnh_mensagem / 2) : (tmnh_mensagem / 2) + 1;
 }
 
-void converte_mensagem_para_numero(char mensagem_usuario[TMNH], double mensagem_numerica[2][TMNH], int qtd_colunas) {
+void converte_mensagem_para_numero(char mensagem_usuario[TMNH], int mensagem_numerica[2][TMNH], int qtd_colunas) {
     int i, j, k;
 
     k = 0;
@@ -108,7 +108,7 @@ void converte_mensagem_para_numero(char mensagem_usuario[TMNH], double mensagem_
     }
 }
 
-void produto_matrizes(int qtd_colunas, double result[2][TMNH], double matriz_a[2][TMNH], double matriz_b[2][2]) {
+void produto_matrizes(int qtd_colunas, int result[2][TMNH], int matriz_a[2][TMNH], int matriz_b[2][2]) {
     int i, j, k;
 
     for(i = 0; i < 2; i++){
@@ -121,19 +121,19 @@ void produto_matrizes(int qtd_colunas, double result[2][TMNH], double matriz_a[2
     }
 }
 
-void decodifica_mensagem(int qtd_colunas, char mensagem_descriptografada[TMNH], double mensagem_numerica[2][TMNH]) {
+void decodifica_mensagem(int qtd_colunas, char mensagem_descriptografada[TMNH], int mensagem_numerica[2][TMNH]) {
     int i, j, x;
 
     x = 0;
 
     for (i = 0; i < 2; i++){
         for (j = 0; j < qtd_colunas; j++){
-            if ((int)mensagem_numerica[i][j] >= 1 && (int)mensagem_numerica[i][j] <= 26){
-                mensagem_descriptografada[x] = (int)mensagem_numerica[i][j]+'a'-1;
-            } else if ((int)mensagem_numerica[i][j] == 27) {
-                mensagem_descriptografada[x] = (int)mensagem_numerica[i][j]+19;
-            } else if ((int)mensagem_numerica[i][j] == 28) {
-                mensagem_descriptografada[x] = (int)mensagem_numerica[i][j]+16;
+            if (mensagem_numerica[i][j] >= 1 && mensagem_numerica[i][j] <= 26){
+                mensagem_descriptografada[x] = mensagem_numerica[i][j]+'a'-1;
+            } else if (mensagem_numerica[i][j] == 27) {
+                mensagem_descriptografada[x] = mensagem_numerica[i][j]+19;
+            } else if (mensagem_numerica[i][j] == 28) {
+                mensagem_descriptografada[x] = mensagem_numerica[i][j]+16;
             } else {
                 mensagem_descriptografada[x] = 32;
             }
@@ -144,18 +144,18 @@ void decodifica_mensagem(int qtd_colunas, char mensagem_descriptografada[TMNH], 
 
 int main() {
     int i, j;
-    double matriz_a[2][2];
+    int matriz_a[2][2];
     int determinante;
     int matriz_adjunta[2][2];
-    double inversa_matriz_a[2][2];
+    int inversa_matriz_a[2][2];
 
     char mensagem_usuario[TMNH];
-    double mensagem_numerica[2][TMNH];
+    int mensagem_numerica[2][TMNH];
     int tmnh_mensagem;
     int qtd_colunas;
 
-    double mensagem_numerica_codificada[2][TMNH];
-    double mensagem_numerica_decodificada[2][TMNH];
+    int mensagem_numerica_codificada[2][TMNH];
+    int mensagem_numerica_decodificada[2][TMNH];
     char mensagem_descriptografada[TMNH];
 
     int opcao_menu;
@@ -220,7 +220,7 @@ int main() {
 
                 for(i = 0; i < 2; i++){
                     for(j = 0; j < qtd_colunas; j++){
-                        printf("%.f\t ", mensagem_numerica_codificada[i][j]);
+                        printf("%d\t ", mensagem_numerica_codificada[i][j]);
                     }
                     printf("\n");
                 }
@@ -235,7 +235,7 @@ int main() {
 
                 for(i = 0; i < 2; i++){
                     for(j = 0; j < qtd_colunas; j++){
-                        printf("%.f ", mensagem_numerica_decodificada[i][j]);
+                        printf("%3d ", mensagem_numerica_decodificada[i][j]);
                     }
                 }
 
