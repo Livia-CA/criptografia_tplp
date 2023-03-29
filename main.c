@@ -17,7 +17,7 @@ void gera_matriz(double matriz_a[2][2], int* determinante) {
 
             *determinante = (matriz_a[0][0] * matriz_a[1][1]) - (matriz_a[0][1] * matriz_a[1][0]);
         }
-        
+
         if(*determinante == 0) {
             i = 0;
             j = 0;
@@ -176,7 +176,7 @@ int main() {
         switch(opcao_menu) {
             case 1:
                 gera_matriz(matriz_a, &determinante);
-                
+
                 printf("\nMatriz A:\n\n");
 
                 imprime_matriz_quadrada(matriz_a);
@@ -251,12 +251,11 @@ int main() {
                 printf("----------------------\n");
                 exit(0);
             break;
-        
+
             default:
                 printf("\n----------------------\n");
-                printf("| Programa encerrado |\n");
+                printf("|    Opcao invalida    |\n");
                 printf("----------------------\n");
-                exit(0);
             break;
         }
     } while (1);
