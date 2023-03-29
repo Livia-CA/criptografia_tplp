@@ -13,7 +13,7 @@ void gera_matriz(double matriz_a[2][2], int* determinante) {
 
     for(i = 0; i < 2; i++) {
         for(j = 0; j < 2; j++) {
-            matriz_a[i][j] = rand()%10000;
+            matriz_a[i][j] = rand()%1000;
 
             *determinante = (matriz_a[0][0] * matriz_a[1][1]) - (matriz_a[0][1] * matriz_a[1][0]);
         }
@@ -70,7 +70,7 @@ void imprime_matriz_quadrada(double matriz[2][2]) {
 }
 
 void recebe_mensagem_usuario(char mensagem_usuario[TMNH]) {
-    printf("Entre com o texto que gostaria de criptografar: ");
+    printf("\n\nInforme a mensagem: ");
     fgets(mensagem_usuario, TMNH, stdin);
 }
 
@@ -155,14 +155,29 @@ int main() {
 
     int opcao_menu;
 
+    printf("------------------------------------------------------\n");
+    printf("|             Trabalho pratico - LabProg1            |\n");
+    printf("------------------------------------------------------\n\n");
+
+    printf("------------------------------------------------------\n");
+    printf("| Menu:                                              |\n");
+    printf("|                                                    |\n");
+    printf("| [1] - Gerar A e sua inversa                        |\n");
+    printf("| [2] - Ler mensagem e codificar                     |\n");
+    printf("| [3] - Imprimir mensagem codificada                 |\n");
+    printf("| [4] - Decodificar e imprimir mensagem decodificada |\n");
+    printf("| [9] - Sair                                         |\n");
+    printf("------------------------------------------------------\n");
+
     do {
+        printf("\n* Opcao: ");
         scanf("%d%*c", &opcao_menu);
 
         switch(opcao_menu) {
             case 1:
                 gera_matriz(matriz_a, &determinante);
                 
-                printf("\nMatriz A:\n");
+                printf("\nMatriz A:\n\n");
 
                 imprime_matriz_quadrada(matriz_a);
 
@@ -170,9 +185,11 @@ int main() {
 
                 gera_matriz_inversa(matriz_adjunta, determinante, inversa_matriz_a);
 
-                printf("\nInversa da Matriz A:\n");
+                printf("\n\nInversa da Matriz A:\n\n");
 
                 imprime_matriz_quadrada(inversa_matriz_a);
+
+                printf("\n------------------------------------------------------\n");
             break;
 
             case 2:
@@ -188,11 +205,13 @@ int main() {
 
                 produto_matrizes(qtd_colunas, mensagem_numerica_codificada, mensagem_numerica, matriz_a);
 
-                printf("Mensagem codificada com sucesso!");
+                printf("\n[#] Mensagem codificada com sucesso!\n");
+
+                printf("\n------------------------------------------------------\n");
             break;
 
             case 3:
-                printf("\n\nMensagem codificada: \n");
+                printf("\n\nMensagem codificada:\n\n");
 
                 for(i = 0; i < 2; i++){
                     for(j = 0; j < qtd_colunas; j++){
@@ -200,6 +219,8 @@ int main() {
                     }
                     printf("\n");
                 }
+
+                printf("\n------------------------------------------------------\n");
             break;
 
             case 4:
@@ -215,22 +236,26 @@ int main() {
 
                 decodifica_mensagem(qtd_colunas, mensagem_descriptografada, mensagem_numerica);
 
-                printf("\n");
+                printf("\n\n");
 
                 for (i = 0; i < tmnh_mensagem; i++){
                     printf("%c", mensagem_descriptografada[i]);
                 }
 
-                exit(0);
+                printf("\n\n------------------------------------------------------\n\n");
             break;
 
             case 9:
-                printf("Programa encerrado");
+                printf("\n----------------------\n");
+                printf("| Programa encerrado |\n");
+                printf("----------------------\n");
                 exit(0);
             break;
         
             default:
-                printf("Programa encerrado");
+                printf("\n----------------------\n");
+                printf("| Programa encerrado |\n");
+                printf("----------------------\n");
                 exit(0);
             break;
         }
