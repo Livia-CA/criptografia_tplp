@@ -173,7 +173,7 @@ int main() {
         switch(opcao_menu) {
             case 1:
                 gera_matriz(matriz_a, &determinante);
-                
+
                 printf("\nMatriz A:\n\n");
 
                 imprime_matriz_quadrada(matriz_a);
@@ -248,12 +248,11 @@ int main() {
                 printf("----------------------\n");
                 exit(0);
             break;
-        
+
             default:
                 printf("\n----------------------\n");
-                printf("| Programa encerrado |\n");
+                printf("|    Opcao invalida    |\n");
                 printf("----------------------\n");
-                exit(0);
             break;
         }
     } while (1);
