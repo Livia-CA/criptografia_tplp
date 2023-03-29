@@ -11,18 +11,15 @@ void gera_matriz(double matriz_a[2][2], int* determinante) {
 
     srand(time(0));
 
-    for(i = 0; i < 2; i++) {
-        for(j = 0; j < 2; j++) {
-            matriz_a[i][j] = rand()%1000;
+    do {
+        for(i = 0; i < 2; i++) {
+            for(j = 0; j < 2; j++) {
+                matriz_a[i][j] = rand()%1000;
+            }
+        }
 
-            *determinante = (matriz_a[0][0] * matriz_a[1][1]) - (matriz_a[0][1] * matriz_a[1][0]);
-        }
-        
-        if(*determinante == 0) {
-            i = 0;
-            j = 0;
-        }
-    }
+        *determinante = (matriz_a[0][0] * matriz_a[1][1]) - (matriz_a[0][1] * matriz_a[1][0]);
+    } while(*determinante == 0);
 }
 
 void gera_matriz_adjunta(double matriz_a[2][2], int matriz_adjunta[2][2]) {
