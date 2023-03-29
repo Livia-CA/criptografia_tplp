@@ -250,9 +250,9 @@ int main() {
             break;
 
             default:
-                printf("\n----------------------\n");
+                printf("\n------------------------\n");
                 printf("|    Opcao invalida    |\n");
-                printf("----------------------\n");
+                printf("------------------------\n");
             break;
         }
     } while (1);
