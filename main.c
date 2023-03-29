@@ -71,12 +71,20 @@ void recebe_mensagem_usuario(char mensagem_usuario[TMNH]) {
     fgets(mensagem_usuario, TMNH, stdin);
 }
 
+void tamanho_mensagem(int* tmnh_mensagem, char mensagem_usuario[TMNH]) {
+    *tmnh_mensagem = strlen(mensagem_usuario) - 1;
+}
+
 void converte_minusculo(char mensagem_usuario[TMNH], int tmnh_mensagem) {
     int i, j;
 
     for (i = 0; i < tmnh_mensagem; i++){
         mensagem_usuario[i] = tolower(mensagem_usuario[i]);
     }
+}
+
+void quantidade_colunas(int* qtd_colunas, int tmnh_mensagem) {
+    *qtd_colunas = (tmnh_mensagem % 2) == 0 ? (tmnh_mensagem / 2) : (tmnh_mensagem / 2) + 1;
 }
 
 void converte_mensagem_para_numero(char mensagem_usuario[TMNH], double mensagem_numerica[2][TMNH], int qtd_colunas) {
@@ -192,11 +200,11 @@ int main() {
             case 2:
                 recebe_mensagem_usuario(mensagem_usuario);
 
-                tmnh_mensagem = strlen(mensagem_usuario) - 1;
+                tamanho_mensagem(&tmnh_mensagem, mensagem_usuario);
 
                 converte_minusculo(mensagem_usuario, tmnh_mensagem);
 
-                qtd_colunas = (tmnh_mensagem % 2) == 0 ? (tmnh_mensagem / 2) : (tmnh_mensagem / 2) + 1;
+                quantidade_colunas(&qtd_colunas, tmnh_mensagem);
 
                 converte_mensagem_para_numero(mensagem_usuario, mensagem_numerica, qtd_colunas);
 
@@ -250,9 +258,9 @@ int main() {
             break;
 
             default:
-                printf("\n------------------------\n");
-                printf("|    Opcao invalida    |\n");
-                printf("------------------------\n");
+                printf("\n------------------\n");
+                printf("| Opcao invalida |\n");
+                printf("------------------\n");
             break;
         }
     } while (1);
