@@ -14,7 +14,7 @@ void gera_matriz(int matriz_a[2][2], int* determinante) {
     do {
         for(i = 0; i < 2; i++) {
             for(j = 0; j < 2; j++) {
-                matriz_a[i][j] = rand()%1000;
+                matriz_a[i][j] = rand()%99;
             }
         }
 
