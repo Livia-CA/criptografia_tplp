@@ -141,6 +141,8 @@ void decodifica_mensagem(int qtd_colunas, char mensagem_descriptografada[TMNH], 
             x++;
         }
     }
+
+    mensagem_descriptografada[x] = '\0';
 }
 
 int main() {
@@ -244,9 +246,7 @@ int main() {
 
                 printf("\n\n");
 
-                for (i = 0; i < tmnh_mensagem; i++){
-                    printf("%c", mensagem_descriptografada[i]);
-                }
+                printf("%s", mensagem_descriptografada);
 
                 printf("\n\n------------------------------------------------------\n\n");
             break;
