@@ -18,7 +18,7 @@ int main() {
     int mensagem_numerica_decodificada[2][TMNH];
     char mensagem_descriptografada[TMNH];
 
-    int opcao_menu;
+    char opcao_menu;
 
     printf("------------------------------------------------------\n");
     printf("|             Trabalho pratico - LabProg1            |\n");
@@ -36,10 +36,10 @@ int main() {
 
     do {
         printf("\n* Opcao: ");
-        scanf("%d%*c", &opcao_menu);
+        scanf("%s%*c", &opcao_menu);
 
         switch(opcao_menu) {
-            case 1:
+            case '1':
                 gera_matriz(matriz_a, &determinante);
 
                 printf("\nMatriz A:\n\n");
@@ -57,7 +57,7 @@ int main() {
                 printf("\n------------------------------------------------------\n");
             break;
 
-            case 2:
+            case '2':
                 recebe_mensagem_usuario(mensagem_usuario);
 
                 tamanho_mensagem(&tmnh_mensagem, mensagem_usuario);
@@ -75,7 +75,7 @@ int main() {
                 printf("\n------------------------------------------------------\n");
             break;
 
-            case 3:
+            case '3':
                 printf("\n\nMensagem codificada:\n\n");
 
                 for(i = 0; i < 2; i++){
@@ -88,7 +88,7 @@ int main() {
                 printf("\n------------------------------------------------------\n");
             break;
 
-            case 4:
+            case '4':
                 produto_matrizes(qtd_colunas, mensagem_numerica_decodificada, mensagem_numerica_codificada, inversa_matriz_a);
 
                 printf("\n\nMensagem decodificada:\n\n");
@@ -108,7 +108,7 @@ int main() {
                 printf("\n\n------------------------------------------------------\n\n");
             break;
 
-            case 9:
+            case '9':
                 printf("\n----------------------\n");
                 printf("| Programa encerrado |\n");
                 printf("----------------------\n");
