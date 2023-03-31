@@ -15,7 +15,7 @@ void tamanho_mensagem(int* tmnh_mensagem, char mensagem_usuario[TMNH]) {
 }
 
 void converte_minusculo(char mensagem_usuario[TMNH], int tmnh_mensagem) {
-    int i, j;
+    int i;
 
     for (i = 0; i < tmnh_mensagem; i++){
         mensagem_usuario[i] = tolower(mensagem_usuario[i]);
